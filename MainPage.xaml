@@ -3,19 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AIPFoodLookup.MainPage"
              xmlns:viewmodel="clr-namespace:AIPFoodLookup.ViewModel"
+             xmlns:commonui="clr-namespace:AIPFoodLookup.CommonUI"
              x:DataType="viewmodel:MainViewModel">
+
+    <ContentPage.Resources>
+        <commonui:HasItemsConverter x:Key="HasItemsConverter"/>
+    </ContentPage.Resources>
 
     <Grid RowDefinitions="100, Auto, *, *" ColumnDefinitions=".75*, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
         <Image Grid.ColumnSpan="2" Source="adaptive_icon.png" />
 
         <Entry Placeholder="Enter a food to check" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Text, Mode=TwoWay}"  />
 
-        <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Allowed}" >
-        </CollectionView>
-        
-        <CollectionView Grid.Row="3" Grid.ColumnSpan="2" ItemsSource="{Binding NotAllowed}" >
-        </CollectionView>
-    </Grid>
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding Allowed.Count, Converter={StaticResource HasItemsConverter}}">
+            <Label Grid.Row="0" Text="Allowed on API:"/>
+            <Border Grid.Row="1" Padding="3,3">
+                <CollectionView ItemsSource="{Binding Allowed}" />
+            </Border>
+        </Grid>
 
-    
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding NotAllowed.Count, Converter={StaticResource HasItemsConverter}}">
+            <Label Grid.Row="0" Text="NOT Allowed on API:" />
+            <Border Grid.Row="1" Padding="3,3">
+                <CollectionView ItemsSource="{Binding NotAllowed}" />
+            </Border>
+        </Grid>
+    </Grid>
+   
 </ContentPage>

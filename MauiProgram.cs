@@ -19,8 +19,12 @@ namespace AIPFoodLookup
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
+
+            builder.Services.AddSingleton<CatagoriesPage>();
+            builder.Services.AddSingleton<CategoriesViewModel>();
 
             return builder.Build();
         }

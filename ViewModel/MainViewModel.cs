@@ -13,6 +13,7 @@ namespace AIPFoodLookup.ViewModel
 {
     public partial class MainViewModel : ObservableObject
     {
+        private IConnectivity connectivity;
         private HashimoJoeApi apiClient = new HashimoJoeApi();
 
         [ObservableProperty]
@@ -23,26 +24,35 @@ namespace AIPFoodLookup.ViewModel
         [ObservableProperty]
         string text;
 
-        public MainViewModel()
+        public MainViewModel(IConnectivity connectivity)
         {
             allowed = new ObservableCollection<string>();
             notAllowed = new ObservableCollection<string>();
+            this.connectivity = connectivity;
         }
 
         async partial void OnTextChanged(string value)
         {
-            Allowed = new ObservableCollection<string>();
-            NotAllowed = new ObservableCollection<string>();
-            if (value.Length > 2)
+            if (connectivity.NetworkAccess != NetworkAccess.Internet)
             {
-                var stringArray = await apiClient.Search(value);
-                if (stringArray.PossibleAllowed != null)
+                await Shell.Current.DisplayAlert("Attention", "No internet!", "OK");
+                return;
+            } 
+            else 
+            { 
+                Allowed = new ObservableCollection<string>();
+                NotAllowed = new ObservableCollection<string>();
+                if (value.Length > 2)
                 {
-                    Allowed = new ObservableCollection<string>(stringArray.PossibleAllowed);
-                }
-                if (stringArray.PossibleDisallowed != null)
-                {
-                    NotAllowed = new ObservableCollection<string>(stringArray.PossibleDisallowed);
+                    var stringArray = await apiClient.Search(value);
+                    if (stringArray.PossibleAllowed != null)
+                    {
+                        Allowed = new ObservableCollection<string>(stringArray.PossibleAllowed);
+                    }
+                    if (stringArray.PossibleDisallowed != null)
+                    {
+                        NotAllowed = new ObservableCollection<string>(stringArray.PossibleDisallowed);
+                    }
                 }
             }
         }
