@@ -2,11 +2,30 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AIPFoodLookup.CatagoriesPage"
+             xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              Title="Catagories">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI Joe!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    
+    <Grid RowDefinitions="100, Auto, *, Auto" Padding="10" RowSpacing="10" ColumnSpacing="10">
+        <Image Grid.ColumnSpan="2" Source="adaptive_icon.png" />
+
+        <CollectionView Grid.Row="1" >
+            <CollectionView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Allowed</x:String>
+                    <x:String>Not Allowed</x:String>
+                </x:Array>
+            </CollectionView.ItemsSource>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="0,5">
+                        <Frame>
+                            <Label Text="{Binding .}" />
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <controls:MTAdView Grid.Row="2"/>
+    </Grid>
 </ContentPage>

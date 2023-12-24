@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AIPFoodLookup.Common
 {
-    public class SearchResult
+    public class Result
     {
         [JsonProperty("allowed")]
         public List<string> Allowed {  get; set; }

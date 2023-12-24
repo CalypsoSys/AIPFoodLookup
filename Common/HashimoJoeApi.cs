@@ -13,6 +13,7 @@ namespace AIPFoodLookup.Common
 #if DEBUG_LOCAL
         private const string _apiScheme = "http";
         private const string _apiHost = "localhost";
+        //private const string _apiHost = "10.0.2.2";
         private const int _apiPort = 8080;
 #else
         private const string _apiScheme = "https";
@@ -39,7 +40,7 @@ namespace AIPFoodLookup.Common
 
         }
 
-        public async Task<SearchResult> Search(string search)
+        public async Task<Result> Search(string search)
         {
             try
             {
@@ -49,23 +50,46 @@ namespace AIPFoodLookup.Common
                 var response = await _httpClient.GetAsync(builder.Uri);
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<SearchResult>(jsonString);
+                return JsonConvert.DeserializeObject<Result>(jsonString);
             }
-            catch (HttpRequestException e)
+            catch (Exception ex)
             {
-                // Handle exception (e.g., log error, throw custom exception)
-                throw;
+                return null;
             }
         }
 
         public async Task<HttpResponseMessage> Suggest(string suggestion, bool allowed )
         {
-            var json = JsonConvert.SerializeObject(new SuggestFood() { InputText = suggestion, Allowed = allowed });
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            try
+            {
+                var json = JsonConvert.SerializeObject(new SuggestFood() { InputText = suggestion, Allowed = allowed });
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            UriBuilder builder = GetBaseUrl("/suggest");
+                UriBuilder builder = GetBaseUrl("/suggest");
 
-            return await _httpClient.PostAsync(builder.Uri, content);
+                return await _httpClient.PostAsync(builder.Uri, content);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Result> Categories(string search)
+        {
+            try
+            {
+                UriBuilder builder = GetBaseUrl("/categories");
+
+                var response = await _httpClient.GetAsync(builder.Uri);
+                response.EnsureSuccessStatusCode();
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Result>(jsonString);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

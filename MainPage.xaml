@@ -14,7 +14,19 @@
     <Grid RowDefinitions="100, Auto, *, *, Auto" ColumnDefinitions=".75*, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
         <Image Grid.ColumnSpan="2" Source="adaptive_icon.png" />
 
-        <Entry Placeholder="Enter a food to check" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Text, Mode=TwoWay}"  />
+        <SwipeView Grid.Row="1" Grid.ColumnSpan="2">
+            <SwipeView.RightItems>
+                <SwipeItems>
+                    <SwipeItem Text="IS" BackgroundColor="Green"/>
+                </SwipeItems>
+            </SwipeView.RightItems>
+            <SwipeView.LeftItems>
+                <SwipeItems>
+                    <SwipeItem Text="NOT" BackgroundColor="Red"/>
+                </SwipeItems>
+            </SwipeView.LeftItems>
+            <Entry Placeholder="Enter a food to check"  Text="{Binding Text, Mode=TwoWay}"  />
+        </SwipeView>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding Allowed.Count, Converter={StaticResource HasItemsConverter}}">
             <Label Grid.Row="0" Text="Allowed on API:"/>

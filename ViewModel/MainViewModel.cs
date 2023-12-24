@@ -51,16 +51,24 @@ namespace AIPFoodLookup.ViewModel
                         {
                             Allowed = new ObservableCollection<string>(stringArray.Allowed);
                         }
+                        else
+                        {
+                            Allowed = new ObservableCollection<string>(new string[]{"Swipe right to Suggest as allowed" });
+                        }
                         if (stringArray.NotAllowed != null)
                         {
                             NotAllowed = new ObservableCollection<string>(stringArray.NotAllowed);
+                        }
+                        else
+                        {
+                            NotAllowed = new ObservableCollection<string>(new string[] { "Swipe left to Suggest as NOT allowed" });
                         }
                     }
                 }
             }
             catch (Exception ex) 
             {
-                await Shell.Current.DisplayAlert("Attention", "A enexpected error occured!", "OK");
+                await Shell.Current.DisplayAlert("Attention", "A unexpected error occured!", "OK");
             }
         }
     }
