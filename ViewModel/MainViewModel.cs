@@ -33,27 +33,34 @@ namespace AIPFoodLookup.ViewModel
 
         async partial void OnTextChanged(string value)
         {
-            if (connectivity.NetworkAccess != NetworkAccess.Internet)
+            try
             {
-                await Shell.Current.DisplayAlert("Attention", "No internet!", "OK");
-                return;
-            } 
-            else 
-            { 
-                Allowed = new ObservableCollection<string>();
-                NotAllowed = new ObservableCollection<string>();
-                if (value.Length > 2)
+                if (connectivity.NetworkAccess != NetworkAccess.Internet)
                 {
-                    var stringArray = await apiClient.Search(value);
-                    if (stringArray.PossibleAllowed != null)
+                    await Shell.Current.DisplayAlert("Attention", "No internet!", "OK");
+                    return;
+                }
+                else
+                {
+                    Allowed = new ObservableCollection<string>();
+                    NotAllowed = new ObservableCollection<string>();
+                    if (value.Length > 2)
                     {
-                        Allowed = new ObservableCollection<string>(stringArray.PossibleAllowed);
-                    }
-                    if (stringArray.PossibleDisallowed != null)
-                    {
-                        NotAllowed = new ObservableCollection<string>(stringArray.PossibleDisallowed);
+                        var stringArray = await apiClient.Search(value);
+                        if (stringArray.Allowed != null)
+                        {
+                            Allowed = new ObservableCollection<string>(stringArray.Allowed);
+                        }
+                        if (stringArray.NotAllowed != null)
+                        {
+                            NotAllowed = new ObservableCollection<string>(stringArray.NotAllowed);
+                        }
                     }
                 }
+            }
+            catch (Exception ex) 
+            {
+                await Shell.Current.DisplayAlert("Attention", "A enexpected error occured!", "OK");
             }
         }
     }

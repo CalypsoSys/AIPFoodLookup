@@ -1,3 +1,4 @@
+#define DEBUG_LOCAL
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace AIPFoodLookup.Common
 {
     internal class HashimoJoeApi
     {
-#if DEBUGX
+#if DEBUG_LOCAL
         private const string _apiScheme = "http";
         private const string _apiHost = "localhost";
         private const int _apiPort = 8080;
@@ -30,7 +31,7 @@ namespace AIPFoodLookup.Common
             UriBuilder builder = new UriBuilder();
             builder.Scheme = _apiScheme;
             builder.Host = _apiHost;
-#if DEBUGX
+#if DEBUG_LOCAL
             builder.Port = _apiPort;
 #endif
             builder.Path = path;

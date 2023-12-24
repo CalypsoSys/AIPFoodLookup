@@ -4,13 +4,14 @@
              x:Class="AIPFoodLookup.MainPage"
              xmlns:viewmodel="clr-namespace:AIPFoodLookup.ViewModel"
              xmlns:commonui="clr-namespace:AIPFoodLookup.CommonUI"
+             xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              x:DataType="viewmodel:MainViewModel">
 
     <ContentPage.Resources>
         <commonui:HasItemsConverter x:Key="HasItemsConverter"/>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="100, Auto, *, *" ColumnDefinitions=".75*, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
+    <Grid RowDefinitions="100, Auto, *, *, Auto" ColumnDefinitions=".75*, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
         <Image Grid.ColumnSpan="2" Source="adaptive_icon.png" />
 
         <Entry Placeholder="Enter a food to check" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Text, Mode=TwoWay}"  />
@@ -28,6 +29,8 @@
                 <CollectionView ItemsSource="{Binding NotAllowed}" />
             </Border>
         </Grid>
+
+        <controls:MTAdView Grid.Row="4"/>
     </Grid>
    
 </ContentPage>

@@ -10,9 +10,9 @@ namespace AIPFoodLookup.Common
 {
     public class SearchResult
     {
-        [JsonProperty("possible_allowed")]
-        public List<string> PossibleAllowed {  get; set; }
-        [JsonProperty("possible_disallowed")]
-        public List<string> PossibleDisallowed { get; set; }
+        [JsonProperty("allowed")]
+        public List<string> Allowed {  get; set; }
+        [JsonProperty("not_allowed")]
+        public List<string> NotAllowed { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AIPFoodLookup.ViewModel;
 using Microsoft.Extensions.Logging;
+using Plugin.MauiMTAdmob;
 
 namespace AIPFoodLookup
 {
@@ -10,6 +11,7 @@ namespace AIPFoodLookup
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiMTAdmob()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
