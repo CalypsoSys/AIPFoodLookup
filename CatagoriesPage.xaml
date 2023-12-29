@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AIPFoodLookup.CatagoriesPage"
              xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
+             xmlns:viewmodel="clr-namespace:AIPFoodLookup.ViewModel"
              Title="Catagories">
     
-    <Grid RowDefinitions="100, Auto, *, Auto" Padding="10" RowSpacing="10" ColumnSpacing="10">
-        <Image Grid.ColumnSpan="2" Source="adaptive_icon.png" />
+    <Grid RowDefinitions="100, *, Auto" Padding="10" RowSpacing="10" ColumnSpacing="10">
+        <Image Grid.Row="0"  Grid.ColumnSpan="2" Source="adaptive_icon.png" />
 
-        <CollectionView Grid.Row="1" >
+        <CollectionView Grid.Row="1" SelectionMode="None">
             <CollectionView.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Allowed</x:String>
@@ -19,6 +20,12 @@
                 <DataTemplate>
                     <Grid Padding="0,5">
                         <Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CategoriesViewModel}}, Path=TapCommand}"
+                                    CommandParameter="{Binding .}"
+                                    />
+                            </Frame.GestureRecognizers>
                             <Label Text="{Binding .}" />
                         </Frame>
                     </Grid>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AIPFoodLookup.CategoryDetailsPage"
+             xmlns:viewmodel="clr-namespace:AIPFoodLookup.ViewModel"
+             x:DataType="viewmodel:CategoryDetailsModel"
+             xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
+             Title="{Binding Path=Text, StringFormat='Catgeory -> {0}'}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="arrow_go_back_fill_icon.png" Command="{Binding GoBackCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="100, *, Auto" Padding="10" RowSpacing="10" ColumnSpacing="10">
+        <Image Grid.Row="0"  Grid.ColumnSpan="2" Source="favicon.png" />
+
+        <CollectionView Grid.Row="1" SelectionMode="None" ItemsSource="{Binding Categories}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="0,5">
+                        <Frame>
+                            <Label Text="{Binding .}" />
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <controls:MTAdView Grid.Row="2"/>
+    </Grid>
+</ContentPage>

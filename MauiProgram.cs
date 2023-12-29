@@ -28,6 +28,9 @@ namespace AIPFoodLookup
             builder.Services.AddSingleton<CatagoriesPage>();
             builder.Services.AddSingleton<CategoriesViewModel>();
 
+            builder.Services.AddTransient<CategoryDetailsPage>();
+            builder.Services.AddTransient<CategoryDetailsModel>();
+
             return builder.Build();
         }
     }

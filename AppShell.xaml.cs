@@ -7,6 +7,8 @@
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(CatagoriesPage), typeof(CatagoriesPage));
+
+            Routing.RegisterRoute(nameof(CategoryDetailsPage), typeof(CategoryDetailsPage));
         }
     }
 }

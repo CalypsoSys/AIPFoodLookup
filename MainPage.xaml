@@ -11,8 +11,8 @@
         <commonui:HasItemsConverter x:Key="HasItemsConverter"/>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="100, Auto, *, *, Auto" ColumnDefinitions=".75*, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
-        <Image Grid.ColumnSpan="2" Source="adaptive_icon.png" />
+    <Grid RowDefinitions="50, Auto, *, *, Auto" ColumnDefinitions=".75*, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
+        <Image Grid.Row="0" Grid.ColumnSpan="2" Source="adaptive_icon.png" />
 
         <SwipeView Grid.Row="1" Grid.ColumnSpan="2">
             <SwipeView.RightItems>

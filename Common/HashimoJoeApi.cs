@@ -75,7 +75,7 @@ namespace AIPFoodLookup.Common
             }
         }
 
-        public async Task<Result> Categories(string search)
+        public async Task<Result> Categories()
         {
             try
             {
