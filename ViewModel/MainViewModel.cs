@@ -23,6 +23,8 @@ namespace AIPFoodLookup.ViewModel
 
         [ObservableProperty]
         string text;
+        [ObservableProperty]
+        string searchType = "Search by Text and Sound";
 
         public MainViewModel(IConnectivity connectivity)
         {
@@ -46,7 +48,7 @@ namespace AIPFoodLookup.ViewModel
                     NotAllowed = new ObservableCollection<string>();
                     if (string.IsNullOrWhiteSpace(value) == false && value.Length > 2)
                     {
-                        var stringArray = await apiClient.Search(value);
+                        var stringArray = await apiClient.Search(value, SearchType);
                         if (stringArray.Allowed != null)
                         {
                             Allowed = new ObservableCollection<string>(stringArray.Allowed);

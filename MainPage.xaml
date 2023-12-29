@@ -16,7 +16,7 @@
         <commonui:HasItemsConverter x:Key="HasItemsConverter"/>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="50, Auto, *, *, Auto" ColumnDefinitions=".75*, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
+    <Grid RowDefinitions="50, Auto, Auto, *, *, Auto" ColumnDefinitions=".75*, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
         <Image Grid.Row="0" Grid.ColumnSpan="2" Source="adaptive_icon.png" />
 
         <SwipeView Grid.Row="1" Grid.ColumnSpan="2">
@@ -38,21 +38,31 @@
             <Entry Placeholder="Enter a food to check, swipe right to suggest IS or left NOT"  Text="{Binding Text, Mode=TwoWay}"  />
         </SwipeView>
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding Allowed.Count, Converter={StaticResource HasItemsConverter}}">
+        <Picker Grid.Row="2" SelectedItem="{Binding SearchType}" SelectedIndex="0">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Search by Text and Sound</x:String>
+                    <x:String>Search by Text</x:String>
+                    <x:String>Search by Sound</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding Allowed.Count, Converter={StaticResource HasItemsConverter}}">
             <Label Grid.Row="0" Text="Allowed on API:"/>
             <Border Grid.Row="1" Padding="3,3">
                 <CollectionView ItemsSource="{Binding Allowed}" />
             </Border>
         </Grid>
 
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding NotAllowed.Count, Converter={StaticResource HasItemsConverter}}">
+        <Grid Grid.Row="4" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding NotAllowed.Count, Converter={StaticResource HasItemsConverter}}">
             <Label Grid.Row="0" Text="NOT Allowed on API:" />
             <Border Grid.Row="1" Padding="3,3">
                 <CollectionView ItemsSource="{Binding NotAllowed}" />
             </Border>
         </Grid>
 
-        <controls:MTAdView Grid.Row="4"/>
+        <controls:MTAdView Grid.Row="5"/>
     </Grid>
    
 </ContentPage>

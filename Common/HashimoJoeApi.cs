@@ -40,12 +40,12 @@ namespace AIPFoodLookup.Common
 
         }
 
-        public async Task<Result> Search(string search)
+        public async Task<Result> Search(string search, string searchType)
         {
             try
             {
                 UriBuilder builder = GetBaseUrl("/search");
-                builder.Query = string.Format("key={0}", search);
+                builder.Query = string.Format("key={0}&type={1}", search, searchType.Replace(" ", "").ToLower());
 
                 var response = await _httpClient.GetAsync(builder.Uri);
                 response.EnsureSuccessStatusCode();
