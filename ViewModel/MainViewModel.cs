@@ -44,7 +44,7 @@ namespace AIPFoodLookup.ViewModel
                 {
                     Allowed = new ObservableCollection<string>();
                     NotAllowed = new ObservableCollection<string>();
-                    if (value.Length > 2)
+                    if (string.IsNullOrWhiteSpace(value) == false && value.Length > 2)
                     {
                         var stringArray = await apiClient.Search(value);
                         if (stringArray.Allowed != null)
@@ -67,6 +67,49 @@ namespace AIPFoodLookup.ViewModel
                 }
             }
             catch (Exception ex) 
+            {
+                await Shell.Current.DisplayAlert("Attention", "A unexpected error occured!", "OK");
+            }
+        }
+
+        [RelayCommand]
+        async Task SuggestAllowed()
+        {
+            await Suggest(Text, true);
+        }
+
+        [RelayCommand]
+        async Task SuggestNotAllowed()
+        {
+            await Suggest(Text, false);
+        }
+
+        async Task Suggest(string text, bool allowed)
+        {
+            try
+            {
+                if (connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await Shell.Current.DisplayAlert("Attention", "No internet!", "OK");
+                    return;
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(text) == false && text.Length > 2)
+                    {
+                        var resp = await apiClient.Suggest(text, allowed);
+                        if (resp.IsSuccessStatusCode)
+                        {
+                            await Shell.Current.DisplayAlert("Attention", "Will will look at your suggestion promptly and add to our cataglog", "Thanks");
+                        }
+                        else
+                        {
+                            await Shell.Current.DisplayAlert("Attention", "Suggestion could not be made", "OK");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 await Shell.Current.DisplayAlert("Attention", "A unexpected error occured!", "OK");
             }

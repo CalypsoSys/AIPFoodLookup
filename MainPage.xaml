@@ -6,6 +6,11 @@
              xmlns:commonui="clr-namespace:AIPFoodLookup.CommonUI"
              xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              x:DataType="viewmodel:MainViewModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="bxs_message_rounded_add_icon.png" Command="{Binding SuggestAllowedCommand}" Text="Suggest IS" />
+        <ToolbarItem IconImageSource="bxs_message_rounded_minus_icon.png" Command="{Binding SuggestNotAllowedCommand}" Text="Suggest NOT"/>
+    </ContentPage.ToolbarItems>
+
 
     <ContentPage.Resources>
         <commonui:HasItemsConverter x:Key="HasItemsConverter"/>
@@ -17,15 +22,20 @@
         <SwipeView Grid.Row="1" Grid.ColumnSpan="2">
             <SwipeView.RightItems>
                 <SwipeItems>
-                    <SwipeItem Text="IS" BackgroundColor="Green"/>
+                    <SwipeItem Text="IS" BackgroundColor="Green" 
+                               Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=SuggestAllowed}"
+                               CommandParameter="{Binding .}"/>
                 </SwipeItems>
             </SwipeView.RightItems>
             <SwipeView.LeftItems>
                 <SwipeItems>
-                    <SwipeItem Text="NOT" BackgroundColor="Red"/>
+                    <SwipeItem Text="NOT" BackgroundColor="Red"                               
+                               Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=SuggestNotAllowed}"
+                               CommandParameter="{Binding .}"/>
+
                 </SwipeItems>
             </SwipeView.LeftItems>
-            <Entry Placeholder="Enter a food to check"  Text="{Binding Text, Mode=TwoWay}"  />
+            <Entry Placeholder="Enter a food to check, swipe right to suggest IS or left NOT"  Text="{Binding Text, Mode=TwoWay}"  />
         </SwipeView>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding Allowed.Count, Converter={StaticResource HasItemsConverter}}">
