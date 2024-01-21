@@ -31,6 +31,9 @@ namespace AIPFoodLookup
             builder.Services.AddTransient<CategoryDetailsPage>();
             builder.Services.AddTransient<CategoryDetailsModel>();
 
+            builder.Services.AddTransient<CategoriesListPage>();
+            builder.Services.AddTransient<CategoriesListModel>();
+
             return builder.Build();
         }
     }

@@ -13,7 +13,7 @@ namespace AIPFoodLookup.ViewModel
         [RelayCommand]
         async Task Tap(string s)
         {
-            await Shell.Current.GoToAsync($"{nameof(CategoryDetailsPage)}?Text={s}");
+            await Shell.Current.GoToAsync($"{nameof(CategoryDetailsPage)}?Category={s}");
         }
     }
 }

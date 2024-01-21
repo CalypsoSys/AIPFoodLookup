@@ -9,6 +9,8 @@
             Routing.RegisterRoute(nameof(CatagoriesPage), typeof(CatagoriesPage));
 
             Routing.RegisterRoute(nameof(CategoryDetailsPage), typeof(CategoryDetailsPage));
+
+            Routing.RegisterRoute(nameof(CategoriesListPage), typeof(CategoriesListPage));
         }
     }
 }

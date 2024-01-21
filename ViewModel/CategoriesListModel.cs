@@ -13,7 +13,8 @@ using System.Windows.Input;
 namespace AIPFoodLookup.ViewModel
 {
     [QueryProperty("Category", "Category")]
-    public partial class CategoryDetailsModel : ObservableObject
+    [QueryProperty("SubCategory", "SubCategory")]
+    public partial class CategoriesListModel : ObservableObject
     {
         private IConnectivity connectivity;
         private HashimoJoeApi apiClient = new HashimoJoeApi();
@@ -21,10 +22,24 @@ namespace AIPFoodLookup.ViewModel
         [ObservableProperty]
         string category;
         [ObservableProperty]
+        string subCategory;
+        [ObservableProperty]
         ObservableCollection<string> categories;
         public ICommand LoadDataCommand { get; }
 
-        public CategoryDetailsModel(IConnectivity connectivity) 
+        public string CombinedTitle => $"Category -> {Category}: {SubCategory}";
+
+        partial void OnCategoryChanged(string value)
+        {
+            OnPropertyChanged(nameof(CombinedTitle));
+        }
+
+        partial void OnSubCategoryChanged(string value)
+        {
+            OnPropertyChanged(nameof(CombinedTitle));
+        }
+
+        public CategoriesListModel(IConnectivity connectivity) 
         {
             this.connectivity = connectivity;
             categories = new ObservableCollection<string>();
@@ -35,12 +50,6 @@ namespace AIPFoodLookup.ViewModel
         async Task GoBack()
         {
             await Shell.Current.GoToAsync("..");
-        }
-
-        [RelayCommand]
-        async Task Tap(string s)
-        {
-            await Shell.Current.GoToAsync($"{nameof(CategoriesListPage)}?Category={Category}&SubCategory={s}");
         }
 
         private async Task LoadDataAsync()
@@ -54,7 +63,7 @@ namespace AIPFoodLookup.ViewModel
                 }
                 else
                 {
-                    var stringArray = await apiClient.Categories();
+                    var stringArray = await apiClient.SubCategories(Category, SubCategory);
                     if (Category == "Allowed" && stringArray.Allowed != null)
                     {
                         stringArray.Allowed.Sort();

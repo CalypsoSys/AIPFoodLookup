@@ -102,7 +102,7 @@ namespace AIPFoodLookup.ViewModel
                         var resp = await apiClient.Suggest(text, allowed);
                         if (resp.IsSuccessStatusCode)
                         {
-                            await Shell.Current.DisplayAlert("Attention", "Will will look at your suggestion promptly and add to our cataglog", "Thanks");
+                            await Shell.Current.DisplayAlert("Attention", "We will look at your suggestion promptly and add to our cataglog", "Thanks");
                         }
                         else
                         {

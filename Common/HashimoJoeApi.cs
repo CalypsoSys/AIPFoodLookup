@@ -58,7 +58,7 @@ namespace AIPFoodLookup.Common
             }
         }
 
-        public async Task<HttpResponseMessage> Suggest(string suggestion, bool allowed )
+        public async Task<HttpResponseMessage> Suggest(string suggestion, bool allowed)
         {
             try
             {
@@ -80,6 +80,24 @@ namespace AIPFoodLookup.Common
             try
             {
                 UriBuilder builder = GetBaseUrl("/categories");
+
+                var response = await _httpClient.GetAsync(builder.Uri);
+                response.EnsureSuccessStatusCode();
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Result>(jsonString);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Result> SubCategories(string category, string subCatagory)
+        {
+            try
+            {
+                UriBuilder builder = GetBaseUrl("/subcategory");
+                builder.Query = string.Format("cat={0}&sub={1}", category, subCatagory.Replace(" and ", "_").ToLower());
 
                 var response = await _httpClient.GetAsync(builder.Uri);
                 response.EnsureSuccessStatusCode();
