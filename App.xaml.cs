@@ -1,4 +1,3 @@
-using Microsoft.UI.Xaml.Controls;
 using Plugin.MauiMTAdmob;
 
 namespace AIPFoodLookup
