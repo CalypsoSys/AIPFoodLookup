@@ -29,8 +29,20 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
   <key>GADApplicationIdentifier</key>
-  <string>ca-app-pub-3940256099942544~3347511713</string>
+  <string>ca-app-pub-3940256099942544~1458002511</string>
   <key>GADIsAdManagerApp</key>
   <true/>
+  <key>GADDelayAppMeasurementInit</key>
+  <true/>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>fetch</string>
+    <!-- Add other background modes as needed -->
+  </array>
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+  </dict>  
 </dict>
 </plist>

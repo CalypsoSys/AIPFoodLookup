@@ -1,5 +1,6 @@
 ﻿using Foundation;
 using Google.MobileAds;
+using Plugin.MauiMTAdmob;
 using UIKit;
 
 namespace AIPFoodLookup
@@ -16,5 +17,23 @@ namespace AIPFoodLookup
         }
 
         private void CompletionHandler(InitializationStatus status) { }
+
+        public AppDelegate()
+        {
+            //If you don't have a license code, you can use the following line instead:
+            CrossMauiMTAdmob.Current.Init();
+        }
+
+        public override void OnActivated(UIApplication application)
+        {
+            base.OnActivated(application);
+            CrossMauiMTAdmob.Current.OnResume();
+        }
+
+        public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
+        {
+            // Fetch data here and call the completion handler
+            completionHandler(UIBackgroundFetchResult.NewData);
+        }
     }
 }

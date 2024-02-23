@@ -62,7 +62,7 @@
             </Border>
         </Grid>
 
-        <controls:MTAdView Grid.Row="5"/>
+        <controls:MTAdView BackgroundColor="Transparent" x:Name="myAds" AdSize="AnchoredAdaptive" IsVisible="true" Grid.Row="5"/>
     </Grid>
    
 </ContentPage>
