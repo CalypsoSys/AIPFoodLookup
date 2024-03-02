@@ -8,10 +8,10 @@
 
     <TabBar>
         <ShellContent Title="Search"
-                     Icon="search_strong_icon.png"
+                     Icon="search_strong_icon"
                      ContentTemplate="{DataTemplate local:MainPage}" />
         <ShellContent Title="Catgegories"
-                     Icon="catalog_icon.png"
+                     Icon="catalog_icon"
                      ContentTemplate="{DataTemplate local:CatagoriesPage}" />
     </TabBar>
 </Shell>
