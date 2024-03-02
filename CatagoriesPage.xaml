@@ -2,12 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AIPFoodLookup.CatagoriesPage"
-             xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              xmlns:viewmodel="clr-namespace:AIPFoodLookup.ViewModel"
              Title="Catagories">
-    
-    <Grid RowDefinitions="100, *, Auto" Padding="10" RowSpacing="10" ColumnSpacing="10">
-        <Image Grid.Row="0"  Grid.ColumnSpan="2" Source="adaptive_icon.png" />
+    <!--xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob" -->
+    <Grid x:Name="MainGrid" RowDefinitions="100, *, Auto" Padding="10" RowSpacing="10" ColumnSpacing="10">
+        <Image Grid.Row="0" Source="adaptive_icon.png" />
 
         <CollectionView Grid.Row="1" SelectionMode="None">
             <CollectionView.ItemsSource>
@@ -33,6 +32,6 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <controls:MTAdView Grid.Row="2"/>
+        <!--<controls:MTAdView Grid.Row="2"/>-->
     </Grid>
 </ContentPage>

@@ -4,8 +4,8 @@
              x:Class="AIPFoodLookup.MainPage"
              xmlns:viewmodel="clr-namespace:AIPFoodLookup.ViewModel"
              xmlns:commonui="clr-namespace:AIPFoodLookup.CommonUI"
-             xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              x:DataType="viewmodel:MainViewModel">
+    <!--xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"-->
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="bxs_message_rounded_add_icon.png" Command="{Binding SuggestAllowedCommand}" Text="Suggest IS" />
         <ToolbarItem IconImageSource="bxs_message_rounded_minus_icon.png" Command="{Binding SuggestNotAllowedCommand}" Text="Suggest NOT"/>
@@ -16,10 +16,10 @@
         <commonui:HasItemsConverter x:Key="HasItemsConverter"/>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="50, Auto, Auto, *, *, Auto" ColumnDefinitions=".75*, .25*" Padding="10" RowSpacing="10" ColumnSpacing="10">
-        <Image Grid.Row="0" Grid.ColumnSpan="2" Source="adaptive_icon.png" />
+    <Grid x:Name="MainGrid" RowDefinitions="50, Auto, Auto, *, *, Auto" Padding="10" RowSpacing="10" ColumnSpacing="10">
+        <Image Grid.Row="0" Source="adaptive_icon.png" />
 
-        <SwipeView Grid.Row="1" Grid.ColumnSpan="2">
+        <SwipeView Grid.Row="1">
             <SwipeView.RightItems>
                 <SwipeItems>
                     <SwipeItem Text="IS" BackgroundColor="Green" 
@@ -48,21 +48,21 @@
             </Picker.ItemsSource>
         </Picker>
         
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding Allowed.Count, Converter={StaticResource HasItemsConverter}}">
+        <Grid Grid.Row="3" RowDefinitions="Auto, *"  IsVisible="{Binding Allowed.Count, Converter={StaticResource HasItemsConverter}}">
             <Label Grid.Row="0" Text="Allowed on API:"/>
             <Border Grid.Row="1" Padding="3,3">
                 <CollectionView ItemsSource="{Binding Allowed}" />
             </Border>
         </Grid>
 
-        <Grid Grid.Row="4" Grid.ColumnSpan="2" RowDefinitions="Auto, *"  IsVisible="{Binding NotAllowed.Count, Converter={StaticResource HasItemsConverter}}">
+        <Grid Grid.Row="4" RowDefinitions="Auto, *"  IsVisible="{Binding NotAllowed.Count, Converter={StaticResource HasItemsConverter}}">
             <Label Grid.Row="0" Text="NOT Allowed on API:" />
             <Border Grid.Row="1" Padding="3,3">
                 <CollectionView ItemsSource="{Binding NotAllowed}" />
             </Border>
         </Grid>
 
-        <controls:MTAdView BackgroundColor="Transparent" x:Name="myAds" AdSize="AnchoredAdaptive" IsVisible="true" Grid.Row="5"/>
+        <!--<controls:MTAdView BackgroundColor="Transparent" x:Name="myAds" AdSize="FullBanner" IsVisible="true" Grid.Row="5"/>-->
     </Grid>
    
 </ContentPage>

@@ -1,6 +1,8 @@
 using AIPFoodLookup.ViewModel;
 using Plugin.MauiMTAdmob;
-using static Microsoft.Maui.ApplicationModel.Permissions;
+using Plugin.MauiMTAdmob.Controls;
+using Plugin.MauiMTAdmob.Extra;
+
 
 namespace AIPFoodLookup
 {
@@ -18,7 +20,25 @@ namespace AIPFoodLookup
 
         private void MainPage_Loaded(object? sender, EventArgs e)
         {
-            myAds.LoadAd();
+            //myAds.LoadAd();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (DeviceInfo.Platform == DevicePlatform.Android)
+            {
+                var adView = new MTAdView
+                {
+                    BackgroundColor = Colors.Transparent,
+                    AdSize = BannerSize.FullBanner,
+                    IsVisible = true
+                };
+                Grid.SetRow(adView, 5);
+                MainGrid.Children.Add(adView);
+                adView.LoadAd();
+            }
         }
     }
 }

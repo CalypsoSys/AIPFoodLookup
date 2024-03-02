@@ -12,7 +12,9 @@ namespace AIPFoodLookup
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
+#if IOS_ADMOB
             MobileAds.SharedInstance.Start(CompletionHandler);
+#endif
             return base.FinishedLaunching(application, launchOptions);
         }
 
@@ -20,14 +22,18 @@ namespace AIPFoodLookup
 
         public AppDelegate()
         {
+#if IOS_ADMOB
             //If you don't have a license code, you can use the following line instead:
             CrossMauiMTAdmob.Current.Init();
+#endif
         }
 
         public override void OnActivated(UIApplication application)
         {
             base.OnActivated(application);
+#if IOS_ADMOB
             CrossMauiMTAdmob.Current.OnResume();
+#endif
         }
 
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
