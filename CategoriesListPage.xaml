@@ -5,10 +5,7 @@
              xmlns:viewmodel="clr-namespace:AIPFoodLookup.ViewModel"
              x:DataType="viewmodel:CategoriesListModel"
              Title="{Binding Path=CombinedTitle}">
-<!--xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"-->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="arrow_go_back_fill_icon.png" Command="{Binding GoBackCommand}" />
-    </ContentPage.ToolbarItems>
+    <!--xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"-->
 
     <Grid x:Name="MainGrid" RowDefinitions="100, *, Auto" Padding="10" RowSpacing="10" ColumnSpacing="10">
         <Image Grid.Row="0" Source="favicon.png" />

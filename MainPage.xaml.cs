@@ -13,8 +13,6 @@ namespace AIPFoodLookup
             InitializeComponent();
             BindingContext = vm;
 
-#if DEBUG
-#endif
             this.Loaded += MainPage_Loaded;
         }
 

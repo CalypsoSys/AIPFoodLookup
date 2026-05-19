@@ -6,10 +6,7 @@
              x:DataType="viewmodel:CategoryDetailsModel"
              Title="{Binding Path=Category, StringFormat='Catgeory -> {0}'}">
     <!--xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"-->
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="arrow_go_back_fill_icon.png" Command="{Binding GoBackCommand}" />
-    </ContentPage.ToolbarItems>
-
+    
     <Grid x:Name="MainGrid" RowDefinitions="100, *, Auto" Padding="10" RowSpacing="10" ColumnSpacing="10">
         <Image Grid.Row="0" Source="favicon.png" />
 
